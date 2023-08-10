@@ -19,6 +19,7 @@ public class TestController {
 
 	@Autowired
 	private TestService testService;
+
 	
 	@GetMapping("/message")
 	public String test() {
