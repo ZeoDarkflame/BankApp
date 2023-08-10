@@ -2,6 +2,8 @@ package com.bankingapp.models;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 
@@ -9,6 +11,7 @@ import jakarta.persistence.Id;
 public class Customer {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int customer_id;
 	private String customer_name;
 	private String password;
