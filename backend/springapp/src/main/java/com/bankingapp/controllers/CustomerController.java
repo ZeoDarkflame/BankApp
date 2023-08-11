@@ -31,19 +31,27 @@ public class CustomerController {
 	private CustomerService customerService;
 	
 	//creating a get mapping that retrieves all the customers detail from the database   
-	@GetMapping(path = "/products", produces = {MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(path = "/customer", produces = {MediaType.APPLICATION_JSON_VALUE})
     List<Customer> products() {
         return customerService.getCustomersFromDatabase();
     }
 	
 	//creating a get mapping that retrieves the detail of a specific customer  
 	@GetMapping("/customer/{customerid}") 
-	Customer findByCustomerIdFromDBWithException(@PathVariable int id) throws ResourceNotFoundException
-	{	Customer customer = customerService.getCustomersById(id)
-    		.orElseThrow(() -> new ResourceNotFoundException("Customer not found for this id :: " + id));
-       System.out.println(id);
-    return customer;	
-	}
+	public Customer retriveUser(@PathVariable("customerid") int id) throws ResourceNotFoundException  
+	{  
+	Customer customer= customerService.getCustomersById(id);  
+	if(customer==null)  
+	//runtime exception  
+	throw new ResourceNotFoundException("Id not  available:"+id);  
+	return customer;  
+	}  
+//	Customer findByCustomerIdFromDBWithException(@PathVariable int id) throws ResourceNotFoundException
+//	{	Customer customer = customerService.getCustomerById(id)
+//    		.orElseThrow(() -> new ResourceNotFoundException("Customer not found for this id :: " + id));
+//       System.out.println(id);
+//    return customer;	
+//	}
 
 	
 	
@@ -62,7 +70,7 @@ public class CustomerController {
     
 
     @DeleteMapping("/customers/{id}")
-    public Map<String,Boolean> deleteCustomer(@PathVariable (value="id") Integer customerId) throws ResourceNotFoundException
+    public Map<String,Boolean> deleteCustomer(@PathVariable ("id") int customerId) throws ResourceNotFoundException
     {
     	return customerService.deleteCustomer(customerId);
     }
