@@ -28,7 +28,7 @@ function LoginForm()
                     {error.password && <p style={{color:"red", fontSize:"13px"}}>{error.password}</p>}
 
                     
-                    <button type="submit">Login</button>
+                    <button type="submit">login</button>
                     <input type="checkbox" checked="checked" /> Remember me
 
                     <div className="container" style={{backgroundColor:"#f1f1f1"}}>
