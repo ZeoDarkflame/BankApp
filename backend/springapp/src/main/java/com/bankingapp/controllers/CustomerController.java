@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bankingapp.exceptions.ResourceNotFoundException;
 import com.bankingapp.models.Customer;
 import com.bankingapp.service.CustomerService;
 
@@ -30,9 +31,9 @@ public class CustomerController {
 	}  
 	//creating a get mapping that retrieves the detail of a specific customer  
 	@GetMapping("/customer/{customerid}")  
-	private Customer getCustomers(@PathVariable("customerid") int customerid)   
+	private Customer getCustomers(@PathVariable("customerid") int customerid) throws ResourceNotFoundException
 	{  
-	return customerService.getCustomersById(customerid);  
+		return customerService.getCustomersById(customerid);  
 	}  	
 	//creating a delete mapping that deletes a specified customer  
 	@DeleteMapping("/customer/{customerid}")  

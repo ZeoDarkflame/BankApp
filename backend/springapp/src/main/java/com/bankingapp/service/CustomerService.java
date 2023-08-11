@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bankingapp.exceptions.ResourceNotFoundException;
 import com.bankingapp.models.*;
 import com.bankingapp.repository.TestRepository;
 
@@ -22,9 +23,10 @@ public class CustomerService {
 	return customers;  
 	}  
 	//getting a specific record by using the method findById() of CrudRepository  
-	public Customer getCustomersById(int id)   
+	public Customer getCustomersById(int id) throws ResourceNotFoundException  
 	{  
-	return customerRepository.findById(id).get();  
+		Customer acqcust = customerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not found id: " + id));  
+		return acqcust;
 	}  
 	//saving a specific record by using the method save() of CrudRepository  
 	public void saveOrUpdate(Customer customers)   
