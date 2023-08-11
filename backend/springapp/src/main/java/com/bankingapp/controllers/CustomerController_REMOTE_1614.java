@@ -37,29 +37,33 @@ public class CustomerController {
     }
 	
 	//creating a get mapping that retrieves the detail of a specific customer  
-	@GetMapping("/customer/{customerid}")  
-	private Customer getCustomers(@PathVariable("customerid") int customerid) throws ResourceNotFoundException
-	{  
-		return customerService.getCustomersById(customerid);  
-	}  	
-	//creating a delete mapping that deletes a specified customer  
-	@DeleteMapping("/customer/{customerid}")  
-	private void deleteCustomer(@PathVariable("customerid") int customerid)   
-	{  
-	customerService.delete(customerid);  
-	}  
-	//creating post mapping that post the customer detail in the database  
-	@PostMapping("/customers")  
-	private int saveCustomer(@RequestBody Customer customers)   
-	{  
-	customerService.saveOrUpdate(customers);  
-	return customers.getCustomer_id();  
-	}  
-	//creating put mapping that updates the book detail   
-	@PutMapping("/customers")  
-	private Customer update(@RequestBody Customer customers)   
-	{  
-	customerService.saveOrUpdate(customers);  
-	return customers;  
-	}  
+	@GetMapping("/customer/{customerid}") 
+	Customer findByCustomerIdFromDBWithException(@PathVariable int id) throws ResourceNotFoundException
+	{	Customer customer = customerService.getCustomersById(id)
+    		.orElseThrow(() -> new ResourceNotFoundException("Customer not found for this id :: " + id));
+       System.out.println(id);
+    return customer;	
+	}
+
+	
+	
+	
+	// lets go
+	@PostMapping("/customers")
+    public Customer createCustomer(@Valid @RequestBody Customer newCustomer) {
+        return customerService.createCustomer(newCustomer);
+    }
+    
+    @PutMapping("/customers/{id}")
+    public ResponseEntity<Customer> updateEmployee(@PathVariable(value = "id")  Integer customer_id, @Valid @RequestBody Customer newCustomer) throws ResourceNotFoundException 
+    {
+        return customerService.updateCustomer(customer_id, newCustomer);
+    }
+    
+
+    @DeleteMapping("/customers/{id}")
+    public Map<String,Boolean> deleteCustomer(@PathVariable (value="id") Integer customerId) throws ResourceNotFoundException
+    {
+    	return customerService.deleteCustomer(customerId);
+    }
 }

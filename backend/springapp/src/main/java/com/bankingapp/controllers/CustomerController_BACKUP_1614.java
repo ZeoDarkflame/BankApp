@@ -37,6 +37,7 @@ public class CustomerController {
     }
 	
 	//creating a get mapping that retrieves the detail of a specific customer  
+<<<<<<< HEAD
 	@GetMapping("/customer/{customerid}")  
 	private Customer getCustomers(@PathVariable("customerid") int customerid) throws ResourceNotFoundException
 	{  
@@ -62,4 +63,35 @@ public class CustomerController {
 	customerService.saveOrUpdate(customers);  
 	return customers;  
 	}  
+=======
+	@GetMapping("/customer/{customerid}") 
+	Customer findByCustomerIdFromDBWithException(@PathVariable int id) throws ResourceNotFoundException
+	{	Customer customer = customerService.getCustomersById(id)
+    		.orElseThrow(() -> new ResourceNotFoundException("Customer not found for this id :: " + id));
+       System.out.println(id);
+    return customer;	
+	}
+
+	
+	
+	
+	// lets go
+	@PostMapping("/customers")
+    public Customer createCustomer(@Valid @RequestBody Customer newCustomer) {
+        return customerService.createCustomer(newCustomer);
+    }
+    
+    @PutMapping("/customers/{id}")
+    public ResponseEntity<Customer> updateEmployee(@PathVariable(value = "id")  Integer customer_id, @Valid @RequestBody Customer newCustomer) throws ResourceNotFoundException 
+    {
+        return customerService.updateCustomer(customer_id, newCustomer);
+    }
+    
+
+    @DeleteMapping("/customers/{id}")
+    public Map<String,Boolean> deleteCustomer(@PathVariable (value="id") Integer customerId) throws ResourceNotFoundException
+    {
+    	return customerService.deleteCustomer(customerId);
+    }
+>>>>>>> edda4d4aa4989979d7c13685b36174af3aa55f26
 }
