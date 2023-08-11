@@ -6,6 +6,8 @@ import {BrowserRouter as Router, Route,Routes, Link,Switch} from 'react-router-d
 import './App.css';
 import LoginForm from './components/LoginValidation/LoginForm';
 import Dashboard from './components/Dashboard'
+import Register from './components/Register'
+
 function App() {
   return (
     <div className="App">
@@ -13,6 +15,7 @@ function App() {
       <Router>
 
         <div className="container">
+<<<<<<< HEAD
           <nav>
             <ul>
               <li>
@@ -37,6 +40,13 @@ function App() {
           {/* <Route path = "/dashboard" element = {<Dashboard/>}/>
           <Route path = "/login" element = {<LoginForm/>}/>   */}
 
+=======
+        <Routes>
+          <Route path = "/dashboard" element = {<Dashboard/>}/>
+          <Route path = "/login" element = {<LoginForm/>}/>  
+          <Route path = "/register" element = {<Register/>}/>  
+        </Routes>
+>>>>>>> f1671566fa1ff7295c9f599b07761cbf8b22f68d
             
        
          
