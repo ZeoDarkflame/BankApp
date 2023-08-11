@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bankingapp.exceptions.ResourceNotFoundException;
 import com.bankingapp.models.Customer;
 import com.bankingapp.service.ListService;
 
@@ -39,7 +40,7 @@ public class AdminController {
 	}
 	
 	@PutMapping("/customer")
-	private ResponseEntity<Customer> update(@Valid @RequestBody Customer newCust) throws Exception{
+	private ResponseEntity<Customer> update(@Valid @RequestBody Customer newCust) throws ResourceNotFoundException{
 		return lister.updateCustomer(newCust.getCustomer_id(), newCust);
 	}
 	
