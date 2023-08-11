@@ -23,7 +23,7 @@ public class ListService {
 	}
 	
 	public ResponseEntity<Customer> updateCustomer(Integer CustId, @RequestBody Customer downstreamCustomer) throws Exception {
-		Customer updatedCustomer = customerrepo.findById(CustId).orElseThrow(()-> new IOException("Errror"));
+		Customer updatedCustomer = customerrepo.findById(CustId).orElseThrow(()-> new IOException("Resource not found Id: "+ CustId));
 		updatedCustomer.setCustomer_name(downstreamCustomer.getCustomer_name());
 		updatedCustomer.setEmail(downstreamCustomer.getEmail());
 		updatedCustomer.setContact(downstreamCustomer.getContact());
