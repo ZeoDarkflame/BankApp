@@ -31,8 +31,8 @@ public class ListService {
 		return ResponseEntity.ok(updatedCustomer);
 	}
 	
-	public void saveCustomer(Customer newCust) {
-		customerrepo.save(newCust);
+	public Customer saveCustomer(Customer newCust) {
+		return customerrepo.save(newCust);
 	}
 	
 }

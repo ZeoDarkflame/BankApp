@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
 public class Customer {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int customer_id;
 	private String customer_name;
 	private String password;
