@@ -2,6 +2,7 @@ package com.bankingapp.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,14 @@ public class CustomerService {
 	return customers;  
 	}  
 	//getting a specific record by using the method findById() of CrudRepository  
-	public Customer getCustomersById(int id)   
-	{  
-	return customerRepository.findById(id).get();  
-	}  
+//	public Customer getCustomersById(int id)   
+//	{  
+//	return customerRepository.findById(id).get();  
+//	}  
+	public Optional<Customer> getCustomersById(int id) {
+		
+		return customerRepository.findById(id);
+	}
 	//saving a specific record by using the method save() of CrudRepository  
 	public void saveOrUpdate(Customer customers)   
 	{  
@@ -41,6 +46,9 @@ public class CustomerService {
 	{  
 	customerRepository.save(customers);  
 	}
+	public Customer createCustomer(Customer cutomer) {
+        return customerRepository.save(cutomer);
+    }
 	
 
 }
