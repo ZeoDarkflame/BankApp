@@ -1,4 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import axios from "axios";
 import validation from './Validation'
 function LoginForm()
 {
@@ -6,6 +8,7 @@ function LoginForm()
         name: '',
         password: ''
     })
+    const navigate=useNavigate();
 
     const [error,setError] = useState({})
 
@@ -14,7 +17,7 @@ function LoginForm()
     }
     function handleSubmit(e) {
         e.preventDefault();
-        setError(validation(values));
+        // setError(validation(values));
     }
     return(
         <div classname='wrap'>
