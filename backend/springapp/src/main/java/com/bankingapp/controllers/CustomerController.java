@@ -37,7 +37,7 @@ public class CustomerController {
     }
 	
 	//creating a get mapping that retrieves the detail of a specific customer  
-	@GetMapping("/customer/{customerid}") 
+	@GetMapping("/customers/{customerid}") 
 	public Customer retriveUser(@PathVariable("customerid") int id) throws ResourceNotFoundException  
 	{  
 	Customer customer= customerService.getCustomersById(id);  

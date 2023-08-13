@@ -30,7 +30,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin")
-	private List<Customer> listCustomers(){
+	private List<Customer> listCustomers() {
 		return lister.getCustomerList();
 	}
 	
