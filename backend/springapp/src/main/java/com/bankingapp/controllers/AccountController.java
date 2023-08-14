@@ -11,7 +11,7 @@ import com.bankingapp.exceptions.ResourceNotFoundException;
 import com.bankingapp.models.Account;
 import com.bankingapp.models.Customer;
 
-
+@CrossOrigin(origins="localhost:3000")
 @RestController
 @RequestMapping("/account")
 public class AccountController {

@@ -7,4 +7,6 @@ public interface AccountServiceI {
     List<Account> getAccountFromDatabase();
     
     void addAccountInDatabase(Account account);
+
+	Account getAccountById(int id);
 }
