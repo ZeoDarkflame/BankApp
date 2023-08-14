@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bankingapp.models.Customer;
-import com.bankingapp.repository.TestRepository;
+import com.bankingapp.repository.CustomerRepository;
 
 @Service
 public class TestServiceImpl implements TestService {
 
 	@Autowired
-	private TestRepository testRepo;
+	private CustomerRepository testRepo;
 	
 	@Override
 	public List<Customer> getCustomerFromDatabase(){

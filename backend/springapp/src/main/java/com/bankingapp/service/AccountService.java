@@ -24,4 +24,10 @@ public class AccountService implements AccountServiceI {
 	public void addAccountInDatabase(Account account) {
 		accountRepo.save(account);
 	}
+	
+	public Account getAccountById(int id)   
+	{  
+		return accountRepo.findById(id).get();  
+	}
+
 }

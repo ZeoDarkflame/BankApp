@@ -1,6 +1,7 @@
 package com.bankingapp.models;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +16,8 @@ public class Customer {
 	private int customer_id;
 	private String customer_name;
 	private String password;
+	
+	@Column(name = "email",nullable = false)
 	private String email;
 	private int contact;
 	
