@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.bankingapp.repository.TestRepository;
+import com.bankingapp.repository.CustomerRepository;
 import com.bankingapp.exceptions.ResourceNotFoundException;
 import com.bankingapp.models.Customer;
 
@@ -17,7 +17,7 @@ import com.bankingapp.models.Customer;
 public class ListService {
 	
 	@Autowired
-	private TestRepository customerrepo;
+	private CustomerRepository customerrepo;
 	
 	public List<Customer> getCustomerList(){
 		return customerrepo.findAll();

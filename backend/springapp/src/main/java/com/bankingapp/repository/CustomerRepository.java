@@ -1,5 +1,10 @@
 package com.bankingapp.repository;
 
-public class CustomerRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.bankingapp.models.Customer;
+
+
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
 }

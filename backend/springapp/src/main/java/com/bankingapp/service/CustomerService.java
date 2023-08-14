@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.bankingapp.exceptions.ResourceNotFoundException;
 import com.bankingapp.models.*;
-import com.bankingapp.repository.TestRepository;
+import com.bankingapp.repository.CustomerRepository;
 
 import jakarta.validation.Valid;
 
@@ -21,7 +21,7 @@ import jakarta.validation.Valid;
 public class CustomerService {
 
 	@Autowired  
-	TestRepository customerRepository;  
+	CustomerRepository customerRepository;  
 	//getting all customer record by using the method findaAll() of CrudRepository  
 //	public List<Customer> getAllCustomers()   
 //	{  
