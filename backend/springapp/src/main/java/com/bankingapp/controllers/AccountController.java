@@ -36,9 +36,9 @@ public class AccountController {
 		return account;  
 	}  
 	
-	@PostMapping("/add")
+	@PostMapping("/account")
 	public String add(@Valid @RequestBody Account account) {
-		accountService.addAccountInDatabase(account);
+		accountService.createAccount(account);
 		return "Account added successfully";
 	}
 	
