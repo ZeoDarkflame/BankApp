@@ -13,7 +13,7 @@ import com.bankingapp.service.TestService;
 import com.bankingapp.models.Customer;
 
 
-@CrossOrigin(origins="localhost:3000")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/test")
 public class TestController {
