@@ -22,12 +22,12 @@ public class AccountController {
 	@Autowired 
 	private AccountService accountService;
 	
-	@GetMapping(path = "/accounts", produces = {MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(path = "/readall", produces = {MediaType.APPLICATION_JSON_VALUE})
 	public List<Account> read() {
 		return accountService.getAccountFromDatabase();
 	}
 	
-	@GetMapping("/account/{accountid}") 
+	@GetMapping("/read/{accountid}") 
 	public Account retriveUser(@PathVariable("accountid") int id) throws ResourceNotFoundException  
 	{  
 		Account account = accountService.getAccountById(id);  
@@ -36,20 +36,19 @@ public class AccountController {
 		return account;  
 	}  
 	
-	
-	@PostMapping("/accounts")
-    public Account createAccount(@Valid @RequestBody Account newAccount) {
-        return accountService.createAccount(newAccount);
-    }
+	@PostMapping("/add")
+	public String add(@Valid @RequestBody Account account) {
+		accountService.createAccount(account);
+		return "Account added successfully";
+	}
     
-    @PutMapping("/account/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Account> updateAccount(@PathVariable(value = "id")  Integer account_id, @Valid @RequestBody Account newAccount) throws ResourceNotFoundException 
     {
         return accountService.updateAccount(account_id, newAccount);
     }
-    
 
-    @DeleteMapping("/accounts/{id}")
+    @DeleteMapping("/delete/{id}")
     public Map<String,Boolean> deleteAccount(@PathVariable ("id") int accountId) throws ResourceNotFoundException
     {
     	return accountService.deleteAccount(accountId);
