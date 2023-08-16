@@ -7,4 +7,5 @@ import com.bankingapp.models.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
+		public Customer findByEmail(String userName);
 }

@@ -7,7 +7,7 @@ public class AuthRequest {
 	
 	public AuthRequest(String userName, String password) {
 		super();
-		this.userName = userName;
+		this.userName = userName; //email
 		this.password = password;
 	}
 	
