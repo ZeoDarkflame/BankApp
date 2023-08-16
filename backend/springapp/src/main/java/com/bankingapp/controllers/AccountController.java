@@ -6,16 +6,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import com.bankingapp.service.AccountService;
 
 import jakarta.validation.Valid;
 
-import com.bankingapp.exceptions.ResourceNotFoundException;
-import com.bankingapp.models.Account;
-import com.bankingapp.models.Customer;
+import com.bankingapp.service.*;
+import com.bankingapp.exceptions.*;
+import com.bankingapp.models.*;
 
 @CrossOrigin(origins="localhost:3000")
 @RestController
