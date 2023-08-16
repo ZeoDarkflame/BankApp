@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.bankingapp.service.AccountService;
+
+import jakarta.validation.Valid;
+
 import com.bankingapp.exceptions.ResourceNotFoundException;
 import com.bankingapp.models.Account;
 import com.bankingapp.models.Customer;
@@ -34,8 +37,7 @@ public class AccountController {
 	}  
 	
 	@PostMapping("/add")
-	public String add() {
-		Account account = new Account();
+	public String add(@Valid @RequestBody Account account) {
 		accountService.addAccountInDatabase(account);
 		return "Account added successfully";
 	}

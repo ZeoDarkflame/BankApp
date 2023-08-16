@@ -24,7 +24,7 @@ import com.bankingapp.service.CustomerService;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins="localhost:3000")
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
@@ -39,7 +39,7 @@ public class CustomerController {
     }
 	
 	//creating a get mapping that retrieves the detail of a specific customer  
-	@GetMapping("/customers/{customerid}") 
+	@GetMapping("/customer/{customerid}") 
 	public Customer retriveUser(@PathVariable("customerid") int id) throws ResourceNotFoundException  
 	{  
 	Customer customer= customerService.getCustomersById(id);  

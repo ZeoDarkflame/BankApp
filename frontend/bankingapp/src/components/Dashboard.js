@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css'; // You can create this CSS file for styling
-=======
-import React from 'react';
->>>>>>> 521133d2592f03290098e8c7d16c199ad082fc28
 
 function Dashboard() {
   const [accountBalance, setAccountBalance] = useState(0); // You can fetch this from the backend
