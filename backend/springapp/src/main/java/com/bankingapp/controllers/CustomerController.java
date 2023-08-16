@@ -60,7 +60,7 @@ public class CustomerController {
 	
 	// lets go
 	@PostMapping("/customers")
-    public Customer createCustomer(@Valid @RequestBody Customer newCustomer) {
+    public Customer createCustomer(@Valid @RequestBody Customer newCustomer) throws Exception {
         return customerService.createCustomer(newCustomer);
     }
     
