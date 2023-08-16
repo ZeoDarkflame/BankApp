@@ -21,14 +21,12 @@ import com.bankingapp.repository.*;
 public class AccountService implements AccountServiceI {
 	
 	@Autowired
-	private AccountRepository accountRepo;
+	AccountRepository accountRepo;
 	
-	@Override 
 	public List<Account> getAccountFromDatabase(){
 		return accountRepo.findAll();
 	}
 	
-	@Override
 	public Account createAccount(Account account) {
 		return accountRepo.save(account);
 	}

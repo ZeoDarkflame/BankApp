@@ -7,13 +7,15 @@
 //import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 //import org.springframework.security.web.SecurityFilterChain;
 //
-//@EnableWebSecurity
+//
 //@Configuration
 //public class SecurityConfiguration {
 //	
 //	@Bean
 //	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 //		
+//		http
+//		.authorizeHttpRequests((authz) -> authz.anyRequest().permitAll()).httpBasic();
 //		return http.build();
 //	}
 //
