@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bankingapp.exceptions.ResourceNotFoundException;
+import com.bankingapp.models.AuthRequest;
 import com.bankingapp.models.Customer;
+import com.bankingapp.repository.CustomerRepository;
 import com.bankingapp.service.CustomerService;
 
 import jakarta.validation.Valid;
@@ -31,6 +33,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private CustomerRepository customerrepo;
 	
 	//creating a get mapping that retrieves all the customers detail from the database   
 	@GetMapping(path = "/customer", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -75,5 +80,15 @@ public class CustomerController {
     public Map<String,Boolean> deleteCustomer(@PathVariable ("id") int customerId) throws ResourceNotFoundException
     {
     	return customerService.deleteCustomer(customerId);
+    }
+    
+    @PostMapping("/auth")
+    public Customer auth(@Valid @RequestBody AuthRequest authreq) {
+    	Customer cust = customerrepo.findByEmail(authreq.getUserName());
+    	if(cust.getPassword() == authreq.getPassword()){
+    			return cust;
+    	}
+    	return null;
+    	
     }
 }
