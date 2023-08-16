@@ -85,7 +85,7 @@ public class CustomerController {
     @PostMapping("/auth")
     public Customer auth(@Valid @RequestBody AuthRequest authreq) {
     	Customer cust = customerrepo.findByEmail(authreq.getUserName());
-    	if(cust.getPassword() == authreq.getPassword()){
+    	if(cust.getPassword().equals( authreq.getPassword())){
     			return cust;
     	}
     	return null;
