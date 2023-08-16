@@ -38,13 +38,7 @@ public class AccountController {
 			throw new ResourceNotFoundException("Id not  available:"+id);  
 		return account;  
 	}  
-	
-	@PostMapping("/add")
-	public String add(@Valid @RequestBody Account account) {
-		accountService.addAccountInDatabase(account);
-		return "Account added successfully";
-	}
-	
+//	
 	
 	@PostMapping("/accounts")
     public Account createAccount(@Valid @RequestBody Account newAccount) {
