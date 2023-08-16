@@ -36,12 +36,12 @@ public class AccountController {
 		return account;  
 	}  
 	
+
 	@PostMapping("/account")
 	public String add(@Valid @RequestBody Account account) {
 		accountService.createAccount(account);
 		return "Account added successfully";
 	}
-	
 	
 	@PostMapping("/accounts")
     public Account createAccount(@Valid @RequestBody Account newAccount) {

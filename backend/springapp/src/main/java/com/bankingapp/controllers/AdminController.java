@@ -18,7 +18,7 @@ import com.bankingapp.service.ListService;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins="localhost:3000")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -37,8 +37,8 @@ public class AdminController {
 	}
 	
 	@PostMapping("/customer")
-	private int savenew(@Valid @RequestBody Customer newCust) {
-		return lister.saveCustomer(newCust).getCustomer_id();
+	private Customer savenew(@Valid @RequestBody Customer newCust) {
+		return lister.saveCustomer(newCust);
 	}
 	
 	@PutMapping("/customer")
