@@ -9,13 +9,13 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="accounts")
+@Table(name="account")
 public class Account {
 	
 	@Id
-	private int customer_id;
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int account_id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int customer_id;
     private float balance;
     private String username;
     private String transactionPassword;
