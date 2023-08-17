@@ -25,6 +25,7 @@ public class Transaction {
 	private TransactionType tType;
 	
 	
+
 	
 	public int getTransaction_id() {
 		return transaction_id;
