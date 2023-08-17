@@ -13,8 +13,9 @@ import jakarta.persistence.Table;
 public class Account {
 	
 	@Id
-	private int account_id;
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int account_id;
+
 	private int customer_id;
     private float balance;
     private String username;
