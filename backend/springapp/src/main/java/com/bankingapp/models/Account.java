@@ -2,14 +2,19 @@ package com.bankingapp.models;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 
 @Entity
+@Table(name="accounts")
 public class Account {
 	
 	@Id
 	private int customer_id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int account_id;
     private float balance;
     private String username;

@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bankingapp.exceptions.ResourceNotFoundException;
+import com.bankingapp.models.Account;
 import com.bankingapp.models.AuthRequest;
 import com.bankingapp.models.Customer;
+import com.bankingapp.repository.AccountRepository;
 import com.bankingapp.repository.CustomerRepository;
 import com.bankingapp.service.CustomerService;
 
@@ -36,6 +38,9 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerRepository customerrepo;
+	
+	@Autowired
+	private AccountRepository accountrepo;
 	
 	//creating a get mapping that retrieves all the customers detail from the database   
 	@GetMapping(path = "/customer", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -85,10 +90,17 @@ public class CustomerController {
     @PostMapping("/auth")
     public Customer auth(@Valid @RequestBody AuthRequest authreq) {
     	Customer cust = customerrepo.findByEmail(authreq.getUserName());
+    	if(cust == null)
+    		return null;
     	if(cust.getPassword().equals( authreq.getPassword())){
-    			return cust;
+    		System.out.println("Successful Login");
+    		return cust;
     	}
-    	return null;
-    	
+    	return null;	
+    }
+    
+    @PostMapping("/getaccount")
+    public Optional<Account> getAcc(@Valid @RequestBody Customer cust){
+    	return accountrepo.findById(cust.getCustomer_id());
     }
 }
