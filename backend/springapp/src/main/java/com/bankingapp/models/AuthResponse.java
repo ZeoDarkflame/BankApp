@@ -3,6 +3,10 @@ package com.bankingapp.models;
 public class AuthResponse {
 	private String username;
 	private boolean isValid;
+
+	public AuthResponse() {
+		super();
+	}
 	
 	public AuthResponse(String username,boolean isValid) {
 		super();
