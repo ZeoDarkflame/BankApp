@@ -19,10 +19,12 @@ public class TransactionService {
 	AccountRepository accountrepo;
 	
 	public Transaction getTransactionsByCustId(int id){
-		Account acc = accountrepo.findbyCustomer_Id(id);
-		List<Transaction> minus__transactions = transactionRepository.findbyFrom_Account(acc.getAccount_id());
-		List<Transaction> plus_transactions = transactionRepository.findbyTo_Account(acc.getAccount_id());
-		return minus_transactions.addAll(plus_transactions); 
+		List<Account> acc = accountrepo.findByCustomerid(id);
+		List<Transaction> minus__transactions = transactionRepository.findByFromAccount(acc.get(0).getAccount_id());
+		List<Transaction> plus_transactions = transactionRepository.findByToAccount(acc.get(0).getAccount_id());
+//		return minus_transactions.addAll(plus_transactions);
+		Transaction temp  = new Transaction();
+		return temp;
 	}  
 	public List<Transaction> getTransactionsFromDatabase() {
 		return transactionRepository.findAll();

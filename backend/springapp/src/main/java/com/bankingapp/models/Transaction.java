@@ -18,8 +18,13 @@ public class Transaction {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int transaction_id;
-	private int from_account;
-	private int to_account;
+	
+	@Column(name  = "from_account")
+	private int fromAccount;
+	
+	@Column(name = "to_account")
+	private int toAccount;
+	
 	private LocalDateTime transaction_time;
 	private int amount;
 	private TransactionType tType;
@@ -36,19 +41,19 @@ public class Transaction {
 	}
 
 	public int getFrom_account() {
-		return from_account;
+		return fromAccount;
 	}
 
 	public void setFrom_account(int from_account) {
-		this.from_account = from_account;
+		this.fromAccount = from_account;
 	}
 
 	public int getTo_account() {
-		return to_account;
+		return toAccount;
 	}
 
 	public void setTo_account(int to_account) {
-		this.to_account = to_account;
+		this.toAccount = to_account;
 	}
 
 	public LocalDateTime getTransaction_time() {

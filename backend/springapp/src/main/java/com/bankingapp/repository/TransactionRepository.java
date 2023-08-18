@@ -8,7 +8,7 @@ import com.bankingapp.models.*;
 
 public interface TransactionRepository extends JpaRepository<Transaction,Integer> {
 	
-	public List<Transaction> findbyFrom_Account(int id);
-	public List<Transaction> findbyTo_Account(int id);
+	public List<Transaction> findByFromAccount(int id);
+	public List<Transaction> findByToAccount(int id);
 }
 

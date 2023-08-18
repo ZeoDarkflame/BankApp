@@ -36,10 +36,20 @@ public class AccountController {
 		return account;  
 	}  
 	
+	@GetMapping("/readCustomer/{customerid}")
+	public List<Account> retrieveAccounts(@PathVariable("customerid") int id) throws ResourceNotFoundException
+	{
+		List<Account> customerAccounts = accountService.getAccountByCustomerId(id);
+		if(customerAccounts.size() == 0) {
+			throw new ResourceNotFoundException("No Accounts for this user");
+		}
+		return customerAccounts;
+	}
+	
 	@PostMapping("/add")
-	public String add(@Valid @RequestBody Account account) {
-		accountService.createAccount(account);
-		return "Account added successfully";
+	public Account add(@Valid @RequestBody Account newAccount) throws Exception{
+		return accountService.createAccount(newAccount);
+//		return "Account added successfully";
 	}
     
     @PutMapping("/update/{id}")
