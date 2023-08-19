@@ -18,6 +18,7 @@ public class Transaction {
 	@Id
 	@Column(name="transaction_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+<<<<<<< HEAD
 	private int transactionId;
 	@Column(name="fromAccount")
 	private int fromAccount;
@@ -25,6 +26,17 @@ public class Transaction {
 	private int toAccount;
 	@Column(name="transactionTime")
 	private LocalDateTime transactionTime;
+=======
+	private int transaction_id;
+	
+	@Column(name  = "from_account")
+	private int fromAccount;
+	
+	@Column(name = "to_account")
+	private int toAccount;
+	
+	private LocalDateTime transaction_time;
+>>>>>>> 1b477f2a8e2dc7c1686b23cd473590bc35435587
 	private int amount;
 	private TransactionType transactionType;
 	
@@ -43,16 +55,26 @@ public class Transaction {
 		return fromAccount;
 	}
 
+<<<<<<< HEAD
 	public void setFrom_account(int fromAccount) {
 		this.fromAccount = fromAccount;
+=======
+	public void setFrom_account(int from_account) {
+		this.fromAccount = from_account;
+>>>>>>> 1b477f2a8e2dc7c1686b23cd473590bc35435587
 	}
 
 	public int getTo_account() {
 		return toAccount;
 	}
 
+<<<<<<< HEAD
 	public void setTo_account(int toAccount) {
 		this.toAccount = toAccount;
+=======
+	public void setTo_account(int to_account) {
+		this.toAccount = to_account;
+>>>>>>> 1b477f2a8e2dc7c1686b23cd473590bc35435587
 	}
 
 	public LocalDateTime getTransaction_time() {

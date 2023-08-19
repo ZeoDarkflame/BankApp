@@ -27,13 +27,17 @@ public class AccountService implements AccountServiceI {
 		return accountRepo.findAll();
 	}
 	
-	public Account createAccount(Account account) {
-		return accountRepo.save(account);
+	public Account createAccount(Account newAccount) {
+		return accountRepo.save(newAccount);
 	}
 	
 	public Account getAccountById(int id) throws ResourceNotFoundException  
 	{  
 		return accountRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Account is not available:" + id));  
+	}
+	
+	public List<Account> getAccountByCustomerId(int customer_id){
+		return accountRepo.findByCustomerid(customer_id);
 	}
 	
 	public ResponseEntity<Account> updateAccount(Integer account_Id, @Valid @RequestBody Account changedAccount )
