@@ -6,15 +6,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 
 @Entity
+@Table(name ="customers")
 public class Customer {
 	
 	@Id
+	@Column(name="customer_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int customer_id;
-	private String customer_name;
+	private int customerId;
+	@Column(name="customer_name")
+	private String customerName;
 	private String password;
 	
 	@Column(name = "email",nullable = false)
@@ -22,19 +26,19 @@ public class Customer {
 	private int contact;
 	
 	public int getCustomer_id() {
-		return customer_id;
+		return customerId;
 	}
 	
 	public void setCustomer_id(int cid) {
-		this.customer_id = cid;
+		this.customerId = cid;
 	}
 	
 	public String getCustomer_name() {
-		return customer_name;
+		return customerName;
 	}
 	
 	public void setCustomer_name(String name) {
-		this.customer_name = name;
+		this.customerName = name;
 	}
 	
 	public String getPassword() {

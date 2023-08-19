@@ -1,6 +1,7 @@
 package com.bankingapp.models;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,24 +10,26 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="account")
+@Table(name="accounts")
 public class Account {
 	
 	@Id
+	@Column(name="account_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int account_id;
+	private int accountId;
 
-	private int customer_id;
+	@Column(name="customer_id")
+	private int customerId;
     private float balance;
     private String username;
     private String transactionPassword;
 
     public int getCustomer_id(){
-        return this.customer_id;
+        return this.customerId;
     }
 
     public int getAccount_id(){
-        return this.account_id;
+        return this.accountId;
     }
 
     public float getBalance(){
@@ -41,12 +44,12 @@ public class Account {
         return this.transactionPassword;
     }
 
-    public void setCustomer_id(int customer_id){
-        this.customer_id = customer_id;
+    public void setCustomer_id(int customerId){
+        this.customerId = customerId;
     }
 
-    public void setAccount_id(int account_id){
-        this.account_id = account_id;
+    public void setAccount_id(int accountId){
+        this.accountId = accountId;
     }
 
     public void setBalance(float balance){

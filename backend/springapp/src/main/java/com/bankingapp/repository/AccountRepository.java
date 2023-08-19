@@ -7,6 +7,6 @@ import com.bankingapp.models.*;
 
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
-		public Account findbyCustomer_Id(int id);
+		public Account findByCustomerId(int id);
 	
 }

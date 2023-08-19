@@ -16,47 +16,51 @@ import jakarta.persistence.Table;
 public class Transaction {
 
 	@Id
+	@Column(name="transaction_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int transaction_id;
-	private int from_account;
-	private int to_account;
-	private LocalDateTime transaction_time;
+	private int transactionId;
+	@Column(name="fromAccount")
+	private int fromAccount;
+	@Column(name="toAccount")
+	private int toAccount;
+	@Column(name="transactionTime")
+	private LocalDateTime transactionTime;
 	private int amount;
-	private TransactionType tType;
+	private TransactionType transactionType;
 	
 	
 
 	
 	public int getTransaction_id() {
-		return transaction_id;
+		return transactionId;
 	}
 	
 	public void setTransaction_id(int tid) {
-		this.transaction_id = tid;
+		this.transactionId = tid;
 	}
 
 	public int getFrom_account() {
-		return from_account;
+		return fromAccount;
 	}
 
-	public void setFrom_account(int from_account) {
-		this.from_account = from_account;
+	public void setFrom_account(int fromAccount) {
+		this.fromAccount = fromAccount;
 	}
 
 	public int getTo_account() {
-		return to_account;
+		return toAccount;
 	}
 
-	public void setTo_account(int to_account) {
-		this.to_account = to_account;
+	public void setTo_account(int toAccount) {
+		this.toAccount = toAccount;
 	}
 
 	public LocalDateTime getTransaction_time() {
-		return transaction_time;
+		return transactionTime;
 	}
 
-	public void setTransaction_time(LocalDateTime transaction_time) {
-		this.transaction_time = transaction_time;
+	public void setTransaction_time(LocalDateTime transactionTime) {
+		this.transactionTime = transactionTime;
 	}
 
 	public int getAmount() {
@@ -68,10 +72,10 @@ public class Transaction {
 	}
 
 	public TransactionType gettType() {
-		return tType;
+		return transactionType;
 	}
 
-	public void settType(TransactionType tType) {
-		this.tType = tType;
+	public void settType(TransactionType transactionType) {
+		this.transactionType = transactionType;
 	}
 }
