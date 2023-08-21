@@ -17,14 +17,22 @@ public class TransactionService {
 	
 	@Autowired
 	AccountRepository accountrepo;
+	 
 	
-	public List<Transaction> getTransactionsByCustId(int id){
-		Account acc = accountrepo.findByCustomerId(id);
-		List<Transaction> minus_transactions = transactionRepository.findAllByFromAccount(acc.getAccount_id());
-		List<Transaction> plus_transactions = transactionRepository.findAllByToAccount(acc.getAccount_id());
-		minus_transactions.addAll(plus_transactions); 
-		return minus_transactions;
-	}  
+	public List<Transaction> getDebited(int id){
+		return transactionRepository.findAllByFromAccount(id);
+	}
+	
+	public List<Transaction> getCredited(int id){
+		return transactionRepository.findAllByToAccount(id);
+	}
+	
+	public List<Transaction> getTransactionsByAccountId(int id){
+		List<Transaction> transactions = getDebited(id);
+		transactions.addAll(getCredited(id));
+		return transactions;
+	} 
+	
 	public List<Transaction> getTransactionsFromDatabase() {
 		return transactionRepository.findAll();
 	}

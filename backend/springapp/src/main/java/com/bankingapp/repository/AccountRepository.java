@@ -11,13 +11,6 @@ import com.bankingapp.models.*;
 
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
-<<<<<<< HEAD
 		public Account findByCustomerId(int id);
-=======
-//	@Query(value = "select * from accounts account where account.customer_id = ?1")
-	public List<Account> findByCustomerid(int customer_id);
-	
-//	public List<Account> findBy
->>>>>>> 1b477f2a8e2dc7c1686b23cd473590bc35435587
 	
 }

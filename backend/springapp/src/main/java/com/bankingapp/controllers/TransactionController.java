@@ -36,10 +36,10 @@ public class TransactionController {
 	@GetMapping("/transaction/{accountid}") 
 	public List<Transaction> retriveTransaction(@PathVariable("accountid") int id) throws ResourceNotFoundException  
 	{  
-		List<Transaction> transactions = transactionService.getTransactionsByCustId(id);  
-	if(transactions.isEmpty())  
-		throw new ResourceNotFoundException("transactionId not  available:"+id);  
-	return transactions; 
+		List<Transaction> transactions = transactionService.getTransactionsByAccountId(id);  
+		if(transactions.isEmpty())  
+			throw new ResourceNotFoundException("transactionId not  available:"+id);  
+		return transactions; 
 	}  
 	
 

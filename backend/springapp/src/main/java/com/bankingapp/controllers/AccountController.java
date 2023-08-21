@@ -37,10 +37,10 @@ public class AccountController {
 	}  
 	
 	@GetMapping("/readCustomer/{customerid}")
-	public List<Account> retrieveAccounts(@PathVariable("customerid") int id) throws ResourceNotFoundException
+	public Account retrieveAccounts(@PathVariable("customerid") int id) throws ResourceNotFoundException
 	{
-		List<Account> customerAccounts = accountService.getAccountByCustomerId(id);
-		if(customerAccounts.size() == 0) {
+		Account customerAccounts = accountService.getAccountByCustomerId(id);
+		if(customerAccounts == null) {
 			throw new ResourceNotFoundException("No Accounts for this user");
 		}
 		return customerAccounts;
