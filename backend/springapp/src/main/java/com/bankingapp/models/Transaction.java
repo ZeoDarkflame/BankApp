@@ -8,6 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 
 
@@ -26,6 +28,9 @@ public class Transaction {
 	private int toAccount;
 	@Column(name="date")
 	private LocalDateTime transactionTime;
+	
+	@Min(1)
+	@Max(Integer.MAX_VALUE)
 	private int amount;
 	
 	@Column(name="transaction_type")

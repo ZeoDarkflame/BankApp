@@ -36,7 +36,12 @@ public class TransactionService {
 	public List<Transaction> getTransactionsFromDatabase() {
 		return transactionRepository.findAll();
 	}
-	public Transaction createTransaction(Transaction transaction) {
+	
+	public Transaction createTransaction(Transaction transaction) throws Exception {
+		//deduct amount from from_account
+		
+		//add amount to to_account
+		
         return transactionRepository.save(transaction);
     }
 }

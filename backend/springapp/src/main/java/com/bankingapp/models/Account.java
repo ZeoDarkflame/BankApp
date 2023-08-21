@@ -55,7 +55,10 @@ public class Account {
     public void setBalance(float balance){
         this.balance = balance;
     }
-
+    public void updateBalance(float change)
+    {
+    	this.balance +=change;
+    }
     public void setUsername(String username){
         this.username = username;
     }
