@@ -36,8 +36,8 @@ public class AccountService implements AccountServiceI {
 		return accountRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Account is not available:" + id));  
 	}
 	
-	public Account getAccountByCustomerId(int customer_id){
-		return accountRepo.findByCustomerId(customer_id);
+	public List<Account> getAccountByCustomerId(int customer_id){
+		return accountRepo.findAllByCustomerId(customer_id);
 	}
 	
 	public ResponseEntity<Account> updateAccount(Integer account_Id, @Valid @RequestBody Account changedAccount )
