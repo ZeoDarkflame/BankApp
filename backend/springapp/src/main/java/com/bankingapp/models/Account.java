@@ -28,7 +28,18 @@ public class Account {
     @Column(name="account_type")
     private int accountType;
 
-    public int getCustomer_id(){
+    public Account(int accountId, int customerId, float balance, String username, String transactionPassword, int activity, int accountType) {
+		// TODO Auto-generated constructor stub
+    	this.accountId = accountId;
+    	this.customerId = customerId;
+    	this.balance = balance;
+    	this.username = username;
+    	this.transactionPassword = transactionPassword;
+    	this.activity = activity;
+    	this.accountType = accountType;
+	}
+
+	public int getCustomer_id(){
         return this.customerId;
     }
 

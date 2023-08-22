@@ -52,11 +52,12 @@ public class CustomerController {
 	@GetMapping("/customer/{customerid}") 
 	public Customer retriveUser(@PathVariable("customerid") int id) throws ResourceNotFoundException  
 	{  
-	Customer customer= customerService.getCustomersById(id);  
-	if(customer==null)  
-	//runtime exception  
-	throw new ResourceNotFoundException("Id not  available:"+id);  
-	return customer;  
+		return customerService.getCustomersById(id); 
+//		System.out.println(customer.getCustomer_name());
+//		if(customer==null) {
+//			throw new ResourceNotFoundException("Id not  available:"+id); 
+//		}
+//		return customer;  
 	}  
 //	Customer findByCustomerIdFromDBWithException(@PathVariable int id) throws ResourceNotFoundException
 //	{	Customer customer = customerService.getCustomerById(id)

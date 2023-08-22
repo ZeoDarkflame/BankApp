@@ -25,6 +25,19 @@ public class Customer {
 	private String email;
 	private int contact;
 	
+	public Customer() {
+		
+	}
+	
+	public Customer(int customerId, String customerName, String email, String password, int contact) {
+		// TODO Auto-generated constructor stub
+		this.customerId = customerId;
+		this.customerName = customerName;
+		this.email = email;
+		this.password = password;
+		this.contact = contact;
+	}
+
 	public int getCustomer_id() {
 		return customerId;
 	}

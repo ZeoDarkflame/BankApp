@@ -23,8 +23,8 @@ public class CustomerService {
 	@Autowired  
 	CustomerRepository customerRepository;  
 	
-	public Customer getCustomersById(int id){
-		return customerRepository.findById(id).get();  
+	public Customer getCustomersById(int id) throws ResourceNotFoundException{
+		return customerRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Customer is not avaialble:"+ id));  
 	}
 	
 	public Customer getCustomersByMail(String email){
@@ -39,6 +39,7 @@ public class CustomerService {
 	public Customer createCustomer(Customer cutomer) {
         return customerRepository.save(cutomer);
     }
+	
 	public ResponseEntity<Customer> updateCustomer(Integer customerId, @Valid @RequestBody Customer changedCustomer)
 			throws ResourceNotFoundException {
 		Customer updatedCustomer = customerRepository.findById(customerId)
@@ -52,6 +53,7 @@ public class CustomerService {
 	
 		return ResponseEntity.ok(updatedCustomer);
 	}
+	
 	public Map<String, Boolean> deleteCustomer(Integer customerId) throws ResourceNotFoundException {
 		Customer updatedCustomer = customerRepository.findById(customerId)
 				.orElseThrow(()-> new ResourceNotFoundException("Customer is not avaialble:"+ customerId));
