@@ -1,11 +1,24 @@
 package com.bankingapp.service;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.Ignore;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -50,24 +63,63 @@ class AccountServiceTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		System.out.println("test no. " + cnt + "started");
+		System.out.println("test no. " + cnt + " started");
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		System.out.println("test no. " + cnt + "ended");
+		System.out.println("test no. " + cnt + " ended");
 		cnt++;
 	}
-
+	
 	@Test
-	void basicTest1() {
-		assertEquals(5,5);
-	}
+    public void find_allAccount_OK() throws Exception {
 
+        List<Account> accounts = Arrays.asList(
+                new Account(10002, 12, (float) 20000.0, "newUser12", "pass@12", 0, 1),
+                new Account(10003, 13, (float) 30000.0, "newUser13", "pass@13", 0, 1));
+
+        when(accountRepository.findAll()).thenReturn(accounts);
+
+        mockMvc.perform(get("/account/readall"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].account_id", is(10002)))
+                .andExpect(jsonPath("$[0].customer_id", is(12)))
+                .andExpect(jsonPath("$[0].balance", is(20000.0)))
+                .andExpect(jsonPath("$[0].username", is("newUser12")))
+                .andExpect(jsonPath("$[0].transactionPassword", is("pass@12")))
+                .andExpect(jsonPath("$[1].account_id", is(10003)))
+                .andExpect(jsonPath("$[1].customer_id", is(13)))
+                .andExpect(jsonPath("$[1].balance", is(30000.0)))
+                .andExpect(jsonPath("$[1].username", is("newUser13")))
+                .andExpect(jsonPath("$[1].transactionPassword", is("pass@13")));
+
+        verify(accountRepository, times(1)).findAll();
+    }
+	
 	@Test
-	void basicTest2() {
-		assertEquals(6,6);
+	public void find_accountId_OK() throws Exception{
+		
+		Account mockAccount = new Account(10001, 11, (float) 10000.0, "newUser11", "pass@11", 0, 1);
+		when(accountRepository.findById(10001)).thenReturn(Optional.of(mockAccount));
+		
+		mockMvc.perform(get("/account/read/10001"))
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.account_id", is(10001)))
+        .andExpect(jsonPath("$.customer_id", is(11)))
+        .andExpect(jsonPath("$.balance", is(10000.0)))
+        .andExpect(jsonPath("$.username", is("newUser11")))
+        .andExpect(jsonPath("$.transactionPassword", is("pass@11")));
+
+		verify(accountRepository, times(1)).findById(10001);
 	}
+	
+	@Test
+    public void find_accountIdNotFound_404() throws Exception {
+        mockMvc.perform(get("/account/read/10000")).andExpect(status().isNotFound());
+    }
 	
 	@Test
 	void accountAddOK() throws Exception{
@@ -79,6 +131,20 @@ class AccountServiceTest {
 		        .content(objectMapper.writeValueAsString(newAccount)))
 		        .andExpect(status().isCreated());
 		
-		assertEquals(0,0);
+		verify(accountRepository, times(1)).save(any(Account.class));
 	}
+	
+//	@Test
+//    public void delete_account_OK() throws Exception {
+//
+//		Account mockAccount = new Account(10001, 11, (float) 10000.0, "newUser11", "pass@11", 0, 1);
+//		when(accountRepository.findById(10001)).thenReturn(Optional.of(mockAccount));
+//		
+//        doNothing().when(accountRepository).deleteById(10001);
+//
+//        mockMvc.perform(delete("/account/delete/10001"))
+//                .andExpect(status().isOk());
+//
+//        verify(accountRepository, times(1)).deleteById(10001);
+//    }
 }

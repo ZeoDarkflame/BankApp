@@ -27,6 +27,10 @@ public class Account {
     
     @Column(name="account_type")
     private int accountType;
+    
+    public Account() {
+    	
+    }
 
     public Account(int accountId, int customerId, float balance, String username, String transactionPassword, int activity, int accountType) {
 		// TODO Auto-generated constructor stub
