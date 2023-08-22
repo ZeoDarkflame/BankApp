@@ -17,7 +17,8 @@ public class TransactionService {
 	
 	@Autowired
 	AccountRepository accountrepo;
-	 
+	
+
 	
 	public List<Transaction> getDebited(int id){
 		return transactionRepository.findAllByFromAccount(id);

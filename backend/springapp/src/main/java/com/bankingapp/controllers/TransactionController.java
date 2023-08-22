@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,13 +40,23 @@ public class TransactionController {
         return transactionService.getTransactionsFromDatabase();
     }
 	
+	public class TransactionPair{	
+		public List<Transaction> debits;
+		public List<Transaction> credits;
+		
+		public TransactionPair(List<Transaction> debits, List<Transaction> credits) {
+			super();
+			this.debits = debits;
+			this.credits = credits;
+		}
+	}
+	
 	@GetMapping("/transaction/{accountid}") 
-	public List<Transaction> retriveTransaction(@PathVariable("accountid") int id) throws ResourceNotFoundException  
+	public TransactionPair retrieveTransaction(@PathVariable("accountid") int id) throws ResourceNotFoundException  
 	{  
-		List<Transaction> transactions = transactionService.getTransactionsByAccountId(id);  
-		if(transactions.isEmpty())  
-			throw new ResourceNotFoundException("transactionId not  available:"+id);  
-		return transactions; 
+		List<Transaction> debits = transactionService.getDebited(id);
+		List<Transaction> credits = transactionService.getCredited(id);
+		return new TransactionPair(debits,credits);
 	}  
 	
 
