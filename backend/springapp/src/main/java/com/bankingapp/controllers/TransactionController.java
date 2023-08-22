@@ -58,6 +58,13 @@ public class TransactionController {
 		List<Transaction> credits = transactionService.getCredited(id);
 		return new TransactionPair(debits,credits);
 	}  
+	@GetMapping("/withdrawal/{accountid}") 
+	public List<Transaction> retrieveWithdrawal(@PathVariable("accountid") int id) throws ResourceNotFoundException  
+	{  
+		List<Transaction> withdrawals = transactionService.getWithdrawal(id);
+		
+		return withdrawals;
+	}
 	
 
 
@@ -81,6 +88,29 @@ public class TransactionController {
 		to_account.updateBalance(change_amount_to);
 		from_account.updateBalance(change_amount_from);
 		accountrepo.save(to_account);
+		accountrepo.save(from_account);
+        return completedTransaction;
+    }
+	@PostMapping("/withdrawal")
+    public Transaction createWithdrawal(@Valid @RequestBody Transaction newTransaction) throws Exception {
+		newTransaction.setTransaction_time(LocalDateTime.now());
+		newTransaction.setTransaction_id(-1);
+		Account from_account = accountrepo.findById(newTransaction.getFrom_account()).orElseThrow(() -> new ResourceNotFoundException("Your account is deactivated or non-existent"));
+		Account to_account = accountrepo.findById(newTransaction.getTo_account()).orElseThrow(() -> new ResourceNotFoundException("Reciever account is deactivated or non-existent"));
+		if(from_account.getBalance() < newTransaction.getAmount())
+			throw new Exception("Not Enough balance");
+		
+		if(to_account == null)
+			throw new ResourceNotFoundException("This account id: ("+newTransaction.getTo_account()+") does not exist");
+		
+		
+		Transaction completedTransaction=transactionService.createTransaction(newTransaction);
+//		Account updatedToAccount = accountRepo.findById();
+//		float change_amount_to=newTransaction.getAmount();
+		float change_amount_from=(newTransaction.getAmount())*-1;
+//		to_account.updateBalance(change_amount_to);
+		from_account.updateBalance(change_amount_from);
+//		accountrepo.save(to_account);
 		accountrepo.save(from_account);
         return completedTransaction;
     }

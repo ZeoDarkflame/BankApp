@@ -21,11 +21,14 @@ public class TransactionService {
 
 	
 	public List<Transaction> getDebited(int id){
-		return transactionRepository.findAllByFromAccount(id);
+		return transactionRepository.customfindAllByFromAccount(id);
 	}
 	
 	public List<Transaction> getCredited(int id){
-		return transactionRepository.findAllByToAccount(id);
+		return transactionRepository.customfindAllByToAccount(id);
+	}
+	public List<Transaction> getWithdrawal(int id){
+		return transactionRepository.findByTransaction(id);
 	}
 	
 	public List<Transaction> getTransactionsByAccountId(int id){
