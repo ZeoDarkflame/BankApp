@@ -103,4 +103,13 @@ public class CustomerController {
     public Optional<Account> getAcc(@Valid @RequestBody Customer cust){
     	return accountrepo.findById(cust.getCustomer_id());
     }
+    
+    @GetMapping("/bymail/{email}") 
+	public Customer getByMail(@PathVariable("email") String email) throws ResourceNotFoundException  
+	{  
+		Customer customer= customerService.getCustomersByMail(email);	
+		if(customer == null)
+			throw new ResourceNotFoundException("Invalid email");
+		return customer;  
+	}  
 }

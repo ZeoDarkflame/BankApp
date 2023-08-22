@@ -48,7 +48,11 @@ public class AccountController {
 	
 	@PostMapping("/add")
 	public Account add(@Valid @RequestBody Account newAccount) throws Exception{
+		newAccount.setAccount_id(-1);
+		newAccount.setBalance(0);
+		newAccount.setActivity(1);
 		return accountService.createAccount(newAccount);
+		
 //		return "Account added successfully";
 	}
     
