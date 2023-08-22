@@ -23,6 +23,10 @@ public class Account {
     private float balance;
     private String username;
     private String transactionPassword;
+    private int activity;
+    
+    @Column(name="account_type")
+    private int accountType;
 
     public int getCustomer_id(){
         return this.customerId;
@@ -66,4 +70,25 @@ public class Account {
     public void setTransactionPassword(String transactionPassword){
         this.transactionPassword = transactionPassword;
     }
+
+	public int getActivity() {
+		return activity;
+	}
+
+	public void setActivity(int i) {
+		this.activity = i;
+	}
+
+	public String getAccountType() {
+		if(accountType == 0)
+			return "Savings";
+		if(accountType == 1)
+			return "Current";
+		else
+			return "Salary";
+	}
+
+	public void setAccountType(int accountType) {
+		this.accountType = accountType;
+	}
 }

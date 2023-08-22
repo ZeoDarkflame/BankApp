@@ -82,7 +82,9 @@ public class Transaction {
 	}
 
 	public String gettType() {
-		if(this.transactionType == 2)
+		if(this.transactionType ==3)
+			return "Withdrawal";
+		else if(this.transactionType == 2)
 			return "IMPS";
 		else if (this.transactionType == 1)
 			return "RTGS";
