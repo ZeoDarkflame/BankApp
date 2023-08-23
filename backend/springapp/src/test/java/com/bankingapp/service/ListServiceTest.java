@@ -80,7 +80,7 @@ class ListServiceTest {
 
         when(customerRepository.findAll()).thenReturn(customers);
 
-        mockMvc.perform(get("/customer/customer"))
+        mockMvc.perform(get("/admin/admin"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].customer_id", is(102)))
@@ -103,7 +103,7 @@ class ListServiceTest {
 		
 		when(customerRepository.save(any(Customer.class))).thenReturn(newCustomer);
 		
-		mockMvc.perform(post("/customer/customers").contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(post("/admin/customer").contentType(MediaType.APPLICATION_JSON)
 		        .content(objectMapper.writeValueAsString(newCustomer)))
 		        .andExpect(status().isOk())
 		        .andExpect(jsonPath("$.customer_id", is(104)))
@@ -124,7 +124,7 @@ class ListServiceTest {
 		Customer updateCustomer = new Customer(101, "User101", "user101@mail.com", "pass@101", 7838101);
         when(customerRepository.save(any(Customer.class))).thenReturn(updateCustomer);
 
-        mockMvc.perform(put("/customer/customers/101")
+        mockMvc.perform(put("/admin/customer")
                 .content(objectMapper.writeValueAsString(updateCustomer))
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))

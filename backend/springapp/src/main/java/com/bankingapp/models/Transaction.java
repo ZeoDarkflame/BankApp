@@ -39,6 +39,16 @@ public class Transaction {
 	
 
 	
+	public Transaction(int transactionId, int fromAccount, int toAccount, LocalDateTime transactionTime, int amount, int transaction_type) {
+		// TODO Auto-generated constructor stub
+		this.transactionId = transactionId;
+		this.fromAccount = fromAccount;
+		this.toAccount = toAccount;
+		this.transactionTime = transactionTime;
+		this.amount = amount;
+		this.transactionType = transaction_type;
+	}
+
 	public int getTransaction_id() {
 		return transactionId;
 	}
