@@ -125,6 +125,36 @@ class AccountServiceTest {
 	}
 	
 	@Test
+	public void find_customerID_OK() throws Exception {
+		List<Account> accounts = Arrays.asList(
+                new Account(10002, 15, (float) 20000.0, "newUser12", "pass@12", 0, 1),
+                new Account(10003, 15, (float) 30000.0, "newUser13", "pass@13", 0, 0));
+		
+		when(accountRepository.findAllByCustomerId(15)).thenReturn(accounts);
+
+        mockMvc.perform(get("/account/readCustomer/15"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].account_id", is(10002)))
+                .andExpect(jsonPath("$[0].customer_id", is(15)))
+                .andExpect(jsonPath("$[0].balance", is(20000.0)))
+                .andExpect(jsonPath("$[0].username", is("newUser12")))
+                .andExpect(jsonPath("$[0].transactionPassword", is("pass@12")))
+                .andExpect(jsonPath("$[0].activity", is(0)))
+		        .andExpect(jsonPath("$[0].accountType", is(1)))
+                .andExpect(jsonPath("$[1].account_id", is(10003)))
+                .andExpect(jsonPath("$[1].customer_id", is(15)))
+                .andExpect(jsonPath("$[1].balance", is(30000.0)))
+                .andExpect(jsonPath("$[1].username", is("newUser13")))
+                .andExpect(jsonPath("$[1].transactionPassword", is("pass@13")))
+                .andExpect(jsonPath("$[1].activity", is(0)))
+		        .andExpect(jsonPath("$[1].accountType", is(0)));
+
+        verify(accountRepository, times(1)).findAllByCustomerId(15);
+		
+	}
+	
+	@Test
     public void find_accountIdNotFound_404() throws Exception {
         mockMvc.perform(get("/account/read/10000")).andExpect(status().isNotFound());
     }
