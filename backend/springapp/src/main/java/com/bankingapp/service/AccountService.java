@@ -49,6 +49,8 @@ public class AccountService implements AccountServiceI {
 		updatedAccount.setCustomer_id(changedAccount.getCustomer_id());
 		updatedAccount.setTransactionPassword(changedAccount.getTransactionPassword());
 		updatedAccount.setUsername(changedAccount.getUsername());
+		updatedAccount.setActivity(changedAccount.getActivity());
+		updatedAccount.setAccountType(changedAccount.getAccountType());
 		
 		accountRepo.save(updatedAccount);
 		return ResponseEntity.ok(updatedAccount);

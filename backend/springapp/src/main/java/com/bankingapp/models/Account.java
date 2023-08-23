@@ -41,7 +41,8 @@ public class Account {
     	this.transactionPassword = transactionPassword;
     	this.activity = activity;
     	this.accountType = accountType;
-	}
+    }
+	
 
 	public int getCustomer_id(){
         return this.customerId;
@@ -94,13 +95,16 @@ public class Account {
 		this.activity = i;
 	}
 
-	public String getAccountType() {
-		if(accountType == 0)
-			return "Savings";
-		if(accountType == 1)
-			return "Current";
-		else
-			return "Salary";
+//	public String getAccountType() {
+//		if(accountType == 0)
+//			return "Savings";
+//		if(accountType == 1)
+//			return "Current";
+//		else
+//			return "Salary";
+//	}
+	public int getAccountType() {
+		return accountType;
 	}
 
 	public void setAccountType(int accountType) {
