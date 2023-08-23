@@ -43,11 +43,13 @@ public class TransactionController {
 	public class TransactionPair{	
 		public List<Transaction> debits;
 		public List<Transaction> credits;
+		public List<Transaction> withdrawals;
 		
-		public TransactionPair(List<Transaction> debits, List<Transaction> credits) {
+		public TransactionPair(List<Transaction> debits, List<Transaction> credits,List<Transaction> withdrawals) {
 			super();
 			this.debits = debits;
 			this.credits = credits;
+			this.withdrawals=withdrawals;
 		}
 	}
 	
@@ -56,15 +58,16 @@ public class TransactionController {
 	{  
 		List<Transaction> debits = transactionService.getDebited(id);
 		List<Transaction> credits = transactionService.getCredited(id);
-		return new TransactionPair(debits,credits);
-	}  
-	@GetMapping("/withdrawal/{accountid}") 
-	public List<Transaction> retrieveWithdrawal(@PathVariable("accountid") int id) throws ResourceNotFoundException  
-	{  
 		List<Transaction> withdrawals = transactionService.getWithdrawal(id);
-		
-		return withdrawals;
-	}
+		return new TransactionPair(debits,credits,withdrawals);
+	}  
+//	@GetMapping("/withdrawal/{accountid}") 
+//	public List<Transaction> retrieveWithdrawal(@PathVariable("accountid") int id) throws ResourceNotFoundException  
+//	{  
+//		List<Transaction> withdrawals = transactionService.getWithdrawal(id);
+//		
+//		return withdrawals;
+//	}
 	
 
 
