@@ -90,17 +90,21 @@ public class Transaction {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-
-	public String gettType() {
-		if(this.transactionType ==3)
-			return "Withdrawal";
-		else if(this.transactionType == 2)
-			return "IMPS";
-		else if (this.transactionType == 1)
-			return "RTGS";
-		else
-			return "NEFT";
+	
+	public int getTType() {
+		return this.transactionType;
 	}
+
+//	public String gettType() {
+//		if(this.transactionType ==3)
+//			return "Withdrawal";
+//		else if(this.transactionType == 2)
+//			return "IMPS";
+//		else if (this.transactionType == 1)
+//			return "RTGS";
+//		else
+//			return "NEFT";
+//	}
 
 	public void settType(int transactionType) {
 		this.transactionType = transactionType;
