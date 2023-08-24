@@ -1,5 +1,7 @@
 package com.bankingapp.service;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +61,38 @@ public class CustomerService {
 		Map<String,Boolean> response  = new HashMap<>();
 		response.put("Customer has been Deleted", Boolean.TRUE);
 		return response;
+	}
+
+	public void LoginAttempt(String username, boolean attemptStatus) {
+		Customer updatedCustomer = customerRepository.findByEmail(username);
+		if(attemptStatus) {
+			updatedCustomer.setLoginAttempt(0);
+			LocalDateTime currentTime = LocalDateTime.now();
+			updatedCustomer.setLastLogin(currentTime);
+		}else {
+			if(LastActiveSafe(updatedCustomer)) {
+				updatedCustomer.setLoginAttempt(1);
+			}else {
+				updatedCustomer.setLoginAttempt(updatedCustomer.getLoginAttempt() + 1);
+				if(updatedCustomer.getLoginAttempt() == 3) {
+					blockCustomer(updatedCustomer);
+				}
+			}
+		}
+		customerRepository.save(updatedCustomer);
+	}
+
+	private void blockCustomer(Customer updatedCustomer) {
+		updatedCustomer.setActiveStatus(false);
+	}
+
+	private boolean LastActiveSafe(Customer updatedCustomer) {
+		return Duration.between(updatedCustomer.getLastLogin(), LocalDateTime.now()).toHours() < 24;
+	}
+
+	public boolean CheckActiveCustomer(String userName) {
+		Customer customer = customerRepository.findByEmail(userName);
+		return customer.getActiveStatus();
 	}
 	
 	

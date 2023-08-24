@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bankingapp.models.AuthRequest;
 import com.bankingapp.models.AuthResponse;
+import com.bankingapp.service.CustomerService;
 import com.bankingapp.util.JwtUtil;
 
 @RestController
@@ -24,8 +25,12 @@ public class WelcomeController {
 
     @Autowired
     private JwtUtil jwtUtil;
+    
     @Autowired
     private AuthenticationManager authenticationManager;
+    
+    @Autowired
+    private CustomerService customerService;
 
     @GetMapping("/")
     public String welcome() {
@@ -40,13 +45,16 @@ public class WelcomeController {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword())
             );
+            if(!customerService.CheckActiveCustomer(authRequest.getUserName())) {
+            	throw new Exception("User Blocked");
+            }
+            customerService.LoginAttempt(authRequest.getUserName(), true);
         } catch (Exception ex) {
+        	customerService.LoginAttempt(authRequest.getUserName(), false);
             throw new Exception("inavalid username/password");
         }
         return jwtUtil.generateToken(authRequest.getUserName());
-    }
-
-    
+    } 
     
     @GetMapping(value = "/validate")
 	public boolean getValidation(@RequestHeader("Authorization") String token){
