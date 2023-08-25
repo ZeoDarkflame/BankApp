@@ -3,6 +3,9 @@ package com.bankingapp.controllers;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,12 +58,34 @@ public class TransactionController {
 	}
 	
 	@GetMapping("/transaction/{accountid}") 
-	public TransactionPair retrieveTransaction(@PathVariable("accountid") int id) throws ResourceNotFoundException  
+	public List<Transaction> retrieveTransaction(@PathVariable("accountid") int id) throws ResourceNotFoundException  
 	{  
 		List<Transaction> debits = transactionService.getDebited(id);
 		List<Transaction> credits = transactionService.getCredited(id);
 		List<Transaction> withdrawals = transactionService.getWithdrawal(id);
-		return new TransactionPair(debits,credits,withdrawals);
+		for(int i=0;i<debits.size();i++)
+		{
+			Transaction currdeb=debits.get(i);
+			int amt=-1*debits.get(i).getAmount();
+			currdeb.setAmount(amt);
+			debits.set(i, currdeb);
+		}
+		for(int i=0;i<withdrawals.size();i++)
+		{
+			Transaction currwith=withdrawals.get(i);
+			int amt=-1*debits.get(i).getAmount();
+			currwith.setAmount(amt);
+			withdrawals.set(i, currwith);
+		}
+		List<Transaction>final_list=new ArrayList<Transaction>();
+		final_list.addAll(debits);
+		final_list.addAll(credits);
+		final_list.addAll(withdrawals);
+		Collections.sort(final_list, Comparator.comparing(Transaction::getTransaction_time));
+
+		return final_list;
+		
+//		return new TransactionPair(debits,credits,withdrawals);
 	}  
 //	@GetMapping("/withdrawal/{accountid}") 
 //	public List<Transaction> retrieveWithdrawal(@PathVariable("accountid") int id) throws ResourceNotFoundException  
