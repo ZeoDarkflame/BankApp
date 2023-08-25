@@ -54,4 +54,9 @@ public class AdminController {
 		
 		return lister.switchStatus(id);
 	}
+	@PutMapping("/ActivateCustomer")
+	private ResponseEntity<Customer> ActivateCustomer(@Valid @RequestBody Customer cust) throws ResourceNotFoundException {
+		return lister.switchCustomerStatus(cust.getCustomer_id());
+	}
+	
 }

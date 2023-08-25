@@ -1,6 +1,8 @@
 package com.bankingapp.models;
 
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +26,15 @@ public class Customer {
 	@Column(name = "email",nullable = false)
 	private String email;
 	private int contact;
+	
+	@Column(name = "loginattempt")
+	private int loginAttempt;
+	
+	@Column(name = "activestatus")
+	private boolean activeStatus;
+	
+	@Column(name = "lastlogin")
+	private LocalDateTime lastLogin;
 	
 	public int getCustomer_id() {
 		return customerId;
@@ -63,5 +74,29 @@ public class Customer {
 	
 	public void setContact(int num) {
 		this.contact = num;
+	}
+	
+	public int getLoginAttempt() {
+		return this.loginAttempt;
+	}
+	
+	public void setLoginAttempt(int attempt) {
+		this.loginAttempt = attempt;
+	}
+
+	public boolean getActiveStatus() {
+		return this.activeStatus;
+	}
+	
+	public void setActiveStatus(boolean status) {
+		this.activeStatus = status;
+	}
+
+	public LocalDateTime getLastLogin() {
+		return this.lastLogin;
+	}
+
+	public void setLastLogin(LocalDateTime lastLogin) {
+		this.lastLogin = lastLogin;
 	}
 }

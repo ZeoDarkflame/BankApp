@@ -36,9 +36,7 @@ public class Transaction {
 	@Column(name="transaction_type")
 	private int transactionType;
 	
-	
 
-	
 	public int getTransaction_id() {
 		return transactionId;
 	}
