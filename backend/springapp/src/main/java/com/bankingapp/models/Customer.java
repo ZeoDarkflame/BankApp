@@ -27,8 +27,13 @@ public class Customer {
 	private String email;
 	private int contact;
 	
+	@Column(name = "loginattempt")
 	private int loginAttempt;
+	
+	@Column(name = "activestatus")
 	private boolean activeStatus;
+	
+	@Column(name = "lastlogin")
 	private LocalDateTime lastLogin;
 	
 	public int getCustomer_id() {
