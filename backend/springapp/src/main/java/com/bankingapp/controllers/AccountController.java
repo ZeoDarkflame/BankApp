@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import com.bankingapp.service.*;
 import com.bankingapp.exceptions.*;
 import com.bankingapp.models.*;
+import com.bankingapp.repository.CustomerRepository;
 
 @CrossOrigin(origins="localhost:3000")
 @RestController
@@ -21,6 +22,9 @@ public class AccountController {
 	
 	@Autowired 
 	private AccountService accountService;
+	
+	@Autowired 
+	private CustomerService customerService;
 	
 	@GetMapping(path = "/readall", produces = {MediaType.APPLICATION_JSON_VALUE})
 	public List<Account> read() {
@@ -51,6 +55,8 @@ public class AccountController {
 		newAccount.setAccount_id(-1);
 		newAccount.setBalance(0);
 		newAccount.setActivity(1);
+		Customer customer= customerService.getCustomersById(newAccount.getCustomer_id());
+		newAccount.setUsername(customer.getCustomer_name());
 		return accountService.createAccount(newAccount);
 		
 //		return "Account added successfully";
