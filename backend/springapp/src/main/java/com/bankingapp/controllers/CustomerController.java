@@ -28,7 +28,7 @@ import com.bankingapp.service.CustomerService;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin("*")
+@CrossOrigin(origins="*",allowedHeaders="*")
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {

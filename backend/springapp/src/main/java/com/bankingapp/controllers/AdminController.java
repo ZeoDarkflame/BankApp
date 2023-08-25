@@ -21,7 +21,7 @@ import com.bankingapp.service.ListService;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin("*")
+@CrossOrigin(origins="*",allowedHeaders="*")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {

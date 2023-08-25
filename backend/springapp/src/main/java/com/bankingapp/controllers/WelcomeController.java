@@ -20,7 +20,7 @@ import com.bankingapp.models.AuthRequest;
 import com.bankingapp.models.AuthResponse;
 import com.bankingapp.util.JwtUtil;
 
-@CrossOrigin("*")
+@CrossOrigin(origins="*",allowedHeaders="*")
 @RestController
 public class WelcomeController {
 
