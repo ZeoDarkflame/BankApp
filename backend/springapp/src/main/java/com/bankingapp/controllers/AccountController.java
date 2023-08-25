@@ -15,7 +15,7 @@ import com.bankingapp.exceptions.*;
 import com.bankingapp.models.*;
 import com.bankingapp.repository.CustomerRepository;
 
-@CrossOrigin(origins="localhost:3000")
+@CrossOrigin(origins="*",allowedHeaders="*")
 @RestController
 @RequestMapping("/account")
 public class AccountController {

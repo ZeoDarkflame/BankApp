@@ -37,6 +37,7 @@ public class SecurityConfiguration {
 
         http
                 .csrf(csrf -> csrf.disable())
+//                .cors(cors -> cors.disable())
                 .authorizeHttpRequests((authz) -> authz
                 		.requestMatchers("/authenticate").permitAll()
 //                		.anyRequest().authenticated())
@@ -67,12 +68,12 @@ public class SecurityConfiguration {
 //    }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    PasswordEncoder passwordEncoder() {
         return   NoOpPasswordEncoder.getInstance();
     }
 }
