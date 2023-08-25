@@ -46,12 +46,18 @@ public class WelcomeController {
                     new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword())
             );
             if(!customerService.CheckActiveCustomer(authRequest.getUserName())) {
+            	System.out.println("blocked");
             	throw new Exception("User Blocked");
             }
             customerService.LoginAttempt(authRequest.getUserName(), true);
         } catch (Exception ex) {
+        	System.out.println("Login failed");
         	customerService.LoginAttempt(authRequest.getUserName(), false);
-            throw new Exception("inavalid username/password");
+        	if(!customerService.CheckActiveCustomer(authRequest.getUserName())) {
+        		throw new Exception("More than 3 incorrect attempts user blocked");
+        	}else {
+        		throw new Exception("inavalid username/password");
+        	}
         }
         return jwtUtil.generateToken(authRequest.getUserName());
     } 

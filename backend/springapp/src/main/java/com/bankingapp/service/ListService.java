@@ -54,6 +54,19 @@ public class ListService {
 		return ResponseEntity.ok(switched);
 	}
 	
+	public ResponseEntity<Customer> switchCustomerStatus(int id) throws ResourceNotFoundException{
+		Customer switched = customerrepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Invalid customer or userId"));
+		if(switched.getActiveStatus() == false) {
+			switched.setActiveStatus(true);
+			switched.setLoginAttempt(0);
+		}else {
+			switched.setActiveStatus(false);
+		}
+		
+		customerrepo.save(switched);
+		return ResponseEntity.ok(switched);
+	}
+	
 	
 	
 }

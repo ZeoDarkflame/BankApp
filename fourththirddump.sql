@@ -87,9 +87,9 @@ CREATE TABLE `customers` (
   `password` varchar(100) NOT NULL,
   `contact` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `loginattempt` int(11) DEFAULT 0,
-  `activestatus` tinyint(1) DEFAULT 1,
+  `activestatus` tinyint(1) NOT NULL DEFAULT 1,
   `lastlogin` datetime DEFAULT NULL,
+  `loginattempt` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`customer_id`),
   UNIQUE KEY `unq_customer` (`contact`,`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COMMENT='contains user information and auth';
@@ -101,7 +101,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'UnoCusto','PriPass',12345,'unocusto@mail.com',NULL,NULL,NULL),(2,'Harsh','SecPass',545,'deuusto@mail.com',NULL,NULL,NULL),(9,'kamal','kamal6',12345,'kamal@mail.com',NULL,NULL,NULL),(10,'user103','pass103',9968103,'user103@mail.com',NULL,NULL,NULL);
+INSERT INTO `customers` VALUES (1,'UnoCusto','PriPass',12345,'unocusto@mail.com',1,NULL,0),(2,'Harsh','SecPass',545,'deuusto@mail.com',1,NULL,0),(9,'kamal','kamal6',12345,'kamal@mail.com',1,NULL,0),(10,'user103','pass103',9968103,'user103@mail.com',1,NULL,0);
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,4 +146,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-25 10:13:52
+-- Dump completed on 2023-08-25 14:59:49

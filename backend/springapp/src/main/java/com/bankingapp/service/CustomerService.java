@@ -64,11 +64,14 @@ public class CustomerService {
 	}
 
 	public void LoginAttempt(String username, boolean attemptStatus) {
+		System.out.println("Successfully landed " + attemptStatus);
 		Customer updatedCustomer = customerRepository.findByEmail(username);
 		if(attemptStatus) {
 			updatedCustomer.setLoginAttempt(0);
 			LocalDateTime currentTime = LocalDateTime.now();
 			updatedCustomer.setLastLogin(currentTime);
+			System.out.println(updatedCustomer.getLastLogin());
+			System.out.println(updatedCustomer.getLoginAttempt());
 		}else {
 			if(LastActiveSafe(updatedCustomer)) {
 				updatedCustomer.setLoginAttempt(1);
@@ -78,6 +81,9 @@ public class CustomerService {
 					blockCustomer(updatedCustomer);
 				}
 			}
+			System.out.println(updatedCustomer.getLastLogin());
+			System.out.println(updatedCustomer.getLoginAttempt());
+			System.out.println(updatedCustomer.getActiveStatus());
 		}
 		customerRepository.save(updatedCustomer);
 	}
@@ -87,7 +93,7 @@ public class CustomerService {
 	}
 
 	private boolean LastActiveSafe(Customer updatedCustomer) {
-		return Duration.between(updatedCustomer.getLastLogin(), LocalDateTime.now()).toHours() < 24;
+		return Duration.between(updatedCustomer.getLastLogin(), LocalDateTime.now()).toHours() > 24;
 	}
 
 	public boolean CheckActiveCustomer(String userName) {
