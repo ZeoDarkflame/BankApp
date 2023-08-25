@@ -46,7 +46,7 @@ public class WelcomeController {
                     new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword())
             );
             if(!customerService.CheckActiveCustomer(authRequest.getUserName())) {
-            	System.out.println("blocked");
+//            	System.out.println("blocked");
             	throw new Exception("User Blocked");
             }
             customerService.LoginAttempt(authRequest.getUserName(), true);
