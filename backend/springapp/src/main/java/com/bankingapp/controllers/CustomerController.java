@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bankingapp.exceptions.IncorrectCredentialsException;
 import com.bankingapp.exceptions.ResourceNotFoundException;
 import com.bankingapp.models.Account;
 import com.bankingapp.models.AuthRequest;
@@ -71,6 +72,7 @@ public class CustomerController {
 	// lets go
 	@PostMapping("/customers")
     public Customer createCustomer(@Valid @RequestBody Customer newCustomer) throws Exception {
+		newCustomer.setActiveStatus(true);
         return customerService.createCustomer(newCustomer);
     }
     
@@ -88,10 +90,10 @@ public class CustomerController {
     }
     
     @PostMapping("/auth")
-    public Customer auth(@Valid @RequestBody AuthRequest authreq) {
+    public Customer auth(@Valid @RequestBody AuthRequest authreq) throws IncorrectCredentialsException {
     	Customer cust = customerrepo.findByEmail(authreq.getUserName());
     	if(cust == null)
-    		return null;
+    		throw new IncorrectCredentialsException("Invalid Username and Password");
     	if(cust.getPassword().equals( authreq.getPassword())){
     		System.out.println("Successful Login");
     		return cust;

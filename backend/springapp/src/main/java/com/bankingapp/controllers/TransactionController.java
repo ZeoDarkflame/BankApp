@@ -1,7 +1,6 @@
 package com.bankingapp.controllers;
 
 
-import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -61,6 +60,7 @@ public class TransactionController {
 	public TransactionPair retrieveTransaction(@PathVariable("accountid") int id) throws ResourceNotFoundException  
 	{  
 		List<Transaction> debits = transactionService.getDebited(id);
+		
 		List<Transaction> credits = transactionService.getCredited(id);
 		List<Transaction> withdrawals = transactionService.getWithdrawal(id);
 		return new TransactionPair(debits,credits,withdrawals);
@@ -77,7 +77,6 @@ public class TransactionController {
 
 	@PostMapping("/transaction")
     public Transaction createTransaction(@Valid @RequestBody Transaction newTransaction) throws Exception {
-//		Clock clock = Clock.systemUTC();
 		newTransaction.setTransaction_time(LocalDateTime.now());
 		newTransaction.setTransaction_id(-1);
 		Account from_account = accountrepo.findById(newTransaction.getFrom_account()).orElseThrow(() -> new ResourceNotFoundException("Your account is deactivated or non-existent"));
